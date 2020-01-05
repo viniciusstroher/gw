@@ -49,7 +49,7 @@ try{
 	//edita numero 
 	$whats = Utils::getNumberGenyMotionSmartPhone($numberAddedked[0]['numbers']);
 	Utils::log("[CRON][cronGetContacts] number: ".$numberAddedked[0]['numbers']." - whats: ".var_export($whats,true),true);
-	$numbersObj->updateNumber($numberAddedked[0]['numbers'],'CHECKED',$whats ? 'true' : 'false');
+	$numbersObj->updateNumber($numberAddedked[0]['numbers'],'CHECKED',$whats);
 }catch(Exception $e){
 	
 	Utils::log("[CRON][cronGetContacts][ERROR] ".$e->getMessage(),true);
