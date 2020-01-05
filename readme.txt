@@ -4,7 +4,7 @@
 #o android usado é um padrao do genymotion
 #nele esta instalados os contatos e o whatsappbusiness
 #tambem esta habilitado o modo desenvolvedor dele
-
+#Verificar a data da ultima atualizacao da conta em contatos (contas)
 
 #INSTALAR ADB
 apt-get install android-tools-adb android-tools-fastboot
