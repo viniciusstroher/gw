@@ -1,3 +1,11 @@
+#ANDROID
+#no arquivo .env esta a conexao do postgres e do adb
+#o adb é o protocolo de connectar a um android
+#o android usado é um padrao do genymotion
+#nele esta instalados os contatos e o whatsappbusiness
+#tambem esta habilitado o modo desenvolvedor dele
+
+
 #INSTALAR ADB
 apt-get install android-tools-adb android-tools-fastboot
 instalar node e pm2
