@@ -15,6 +15,10 @@ pm2 start /var/www/html/gw/crons/cronGetContacts.php --cron "*/1 * * * *"
 #1 * * * * /usr/bin/php /var/www/html/gw/crons/cronAddContacts.php
 #1 * * * * /usr/bin/php /var/www/html/gw/crons/cronGetContacts.php
 
+
+#habilitar (apache) - para pegar ip do cliente  header:x-forwareded-for
+mod_custom_header
+
 ######################################################################
 
 #Insert - Consultar
