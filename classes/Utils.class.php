@@ -88,9 +88,9 @@
 
 		
 
-		public static function getNumberGenyMotionSmartPhone($number){
+		public static function isNumberWhatsApp($number){
 			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
-			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \"display_name=\'$numberReplaced\' and deleted=0\"";
+			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \"display_name=\'$numberReplaced\' and account_type=com.whatsapp.w4b\"";
 			
 
 			$return = shell_exec($cmd);
@@ -105,7 +105,7 @@
 		public static function isNumberExistsInGenyMotionAndroid($number){
 			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
 			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \"display_name=\'$numberReplaced\' and deleted=0\"";
-			
+			//account_type=com.whatsapp.w4b
 			$return = shell_exec($cmd);
 			if(strpos($return, "No result found") !== false){
 			    return true;

@@ -47,8 +47,8 @@ try{
 	Utils::log("[CRON][cronGetContacts] isSmartphoneConnected: ".var_export($isSmartphoneConnected,true),true);
 
 	//edita numero 
-	$whats = Utils::getNumberGenyMotionSmartPhone($numberAddedked[0]['numbers']);
-	Utils::log("[CRON][cronGetContacts] number: ".$numberAddedked[0]['numbers']." - whats: ".var_export($whats,true),true);
+	$whats = Utils::isNumberWhatsApp($numberAddedked[0]['numbers']);
+	Utils::log("[CRON][cronGetContacts] isNumberWhatsApp number: ".$numberAddedked[0]['numbers']." - whats: ".var_export($whats,true),true);
 	$numbersObj->updateNumber($numberAddedked[0]['numbers'],'CHECKED',$whats);
 }catch(Exception $e){
 	
