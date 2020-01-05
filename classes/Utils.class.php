@@ -90,10 +90,14 @@
 
 		public static function isNumberWhatsApp($number){
 			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
-			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \"display_name=\'$numberReplaced\' and deleted=0 and account_type=\'com.whatsapp.w4b\'\"";
+			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \\\"display_name=\'$numberReplaced\' and deleted=0 and account_type=\'com.whatsapp.w4b\'\\\"";
 			
+			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$cmd);
 
 			$return = shell_exec($cmd);
+
+			Utils::log("[CRON][cronAddContacts] isNumberWhatsApp: $number \n".$return);
+
 			if(strpos($return, "whatsapp") !== false){
 			    return true;
 			} else{
@@ -104,9 +108,14 @@
 
 		public static function isNumberExistsInGenyMotionAndroid($number){
 			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
-			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \"display_name=\'$numberReplaced\' and deleted=0\"";
-			//account_type=com.whatsapp.w4b
+			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \\\"display_name=\'$numberReplaced\' and deleted=0\\\"";
+			
+			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$cmd);
+			
 			$return = shell_exec($cmd);
+
+			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$return);
+			
 			if(strpos($return, "No result found.") !== false){
 			    return true;
 			}
