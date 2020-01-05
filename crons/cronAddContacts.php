@@ -48,8 +48,9 @@ try{
 
 	//adiciona numero se nao existir
 	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
-	Utils::log("[CRON][cronAddContact] existsNumber: ".var_export($existsNumber,true),true);
+	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']."  existsNumber: ".var_export($existsNumber,true),true);
 	if(!$existsNumber){
+		Utils::log("[CRON][cronAddContact] addContactGenyMotionSmartPhone adicionando: ".$numberUnchecked[0]['numbers'],true);
 		Utils::addContactGenyMotionSmartPhone($numberUnchecked[0]['numbers']);
 		$numbersObj->updateNumber($numberUnchecked[0]['numbers'],'ADDED');
 	}

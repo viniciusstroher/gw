@@ -43,7 +43,7 @@ class Numbers{
 	    $sqlCheck = "SELECT * 
 	    			 FROM numbers 
 	    			 WHERE status = 'ADDED' 
-	    			 and EXTRACT(EPOCH FROM (now() - created_at)) > 60 ";
+	    			 and EXTRACT(EPOCH FROM (now() - updated_at)) > 60 ";
 	    if(!empty($limit)){
 	    	$sqlCheck .= "LIMIT $limit";
 	    }

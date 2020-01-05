@@ -107,7 +107,7 @@
 			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \"display_name=\'$numberReplaced\' and deleted=0\"";
 			//account_type=com.whatsapp.w4b
 			$return = shell_exec($cmd);
-			if(strpos($return, "No result found") !== false){
+			if(strpos($return, "No result found.") !== false){
 			    return true;
 			}
 			return false;
