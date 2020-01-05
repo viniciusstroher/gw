@@ -114,9 +114,9 @@
 			
 			$return = shell_exec($cmd);
 
-			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$return);
+			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$return."\n Added? ".var_export((strpos($return, "No result found.") !== false),true));
 			
-			if(strpos($return, "No result found.") !== false){
+			if(strpos($return, $numberReplaced) !== false){
 			    return true;
 			}
 			return false;
