@@ -20,11 +20,13 @@ try{
 					$envVars['username'],
 					$envVars['password']);
 
-	$check = Auth::check($db);
-	if(!$check){
+	$user_id = Auth::check($db);
+	if(!$user_id){
 		Utils::log("Usuario invalido");
 		throw new Exception("Usuario invalido", 1);
 	}
+
+	Utils::Log("Usuario $user_id authenticado.");
 
 	$action = @$_REQUEST['action'];
 	$response = array();
@@ -44,7 +46,7 @@ try{
 			$numbersObj = new Numbers($db);
 			$rsNumber = $numbersObj->getNumber($number);
 			if(empty($rsNumber)){
-				$numbersObj->addNumber($number);
+				$numbersObj->addNumber($user_id,$number);
 				$rsNumber = $numbersObj->getNumber($number);
 			}
 

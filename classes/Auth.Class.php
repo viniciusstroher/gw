@@ -16,13 +16,13 @@ class Auth
 			throw new Exception("Username ou password vazios", 1);
 		}
 
-		$sql = "SELECT * FROM users WHERE username = '$username' and password = '$password'";
+		$sql = "SELECT id FROM users WHERE username = '$username' and password = '$password'";
 		$rsUser = $db->getRow($sql);
 
 		if(empty($rsUser)){
 			return false;
 		}
 
-		return true;
+		return $rsUser['id'];
 	}	
 }

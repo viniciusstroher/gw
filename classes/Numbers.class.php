@@ -13,6 +13,9 @@ class Numbers{
 	    			 WHERE numbers 
 	    			 like '%$number%'";
 	    $numbers = $this->db->getRows($sqlCheck);
+
+	    Utils::log($sqlCheck);
+
         return $numbers;
 
 	}
@@ -50,7 +53,7 @@ class Numbers{
 
 	}
 
-	function addNumber($number,$status = 'UNCHECKED',$whats = false){
+	function addNumber($user_id,$number,$status = 'UNCHECKED',$whats = false){
   
 	    $sqlCheck  = "SELECT COUNT(*) numbers 
 	    			  FROM numbers 
@@ -63,10 +66,15 @@ class Numbers{
 			throw new Exception("Numero {$number} já existe na base", 1);
 		}
 
+		if(empty($user_id)){
+			Utils::log("user_id deve  ser um numerico maior que 0");
+			throw new Exception("user_id deve  ser um numerico maior que 0", 1);
+		}
+
 		$whats = $whats ? 'true':'false';
 
-	    $sqlInsert = "INSERT INTO numbers (numbers,whats,status,created_at,updated_at) 
-	    			  VALUES ('$number',$whats,'$status',now(),null)";
+	    $sqlInsert = "INSERT INTO numbers (user_id,numbers,whats,status,created_at,updated_at) 
+	    			  VALUES ($user_id,'$number',$whats,'$status',now(),null)";
 
 	    $id = $this->db->insert($sqlInsert);
 		if(!is_numeric($id)){
