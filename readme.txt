@@ -37,7 +37,10 @@ Method:
 GET
 
 IP: 
-http://<IP>/gw/api.php?action=checkNumber&number=<PAIS><DD><NUMBER>
+http://<IP>/gw/api.php?action=checkNumber&number=<DD><NUMBER>
+EX:
+                                                 DDNNNNNNNN
+http://<IP>/gw/api.php?action=checkNumber&number=5195412459
 
 RETORNO:
 {
