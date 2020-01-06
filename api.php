@@ -13,7 +13,9 @@ try{
 	$access_data = json_encode($access_data); 
 	Utils::log($access_data);
 
-	if(!isset($_POST)){
+
+
+	if(empty($_POST)){
 		Utils::log("O acesso a esta api precisa ser feito pelo method post");
 		throw new Exception("O acesso a esta api precisa ser feito pelo method post", 1);
 	}
@@ -80,5 +82,8 @@ try{
 	Utils::log($e->getMessage());
 	print json_encode(array("error"=>$e->getMessage()));	
 }finally {
-	$db->close();
+
+	if(!empty($db)){
+		$db->close();
+	}
 }

@@ -29,5 +29,7 @@ try{
 	print $e->getMessage()."\n";
 
 }finally{
-	$db->close();
+	if(!empty($db)){
+		$db->close();
+	}
 }

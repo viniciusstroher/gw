@@ -55,5 +55,7 @@ try{
 	Utils::log("[CRON][cronGetContacts][ERROR] ".$e->getMessage(),true);
 
 }finally{
-	$db->close();
+	if(!empty($db)){
+		$db->close();
+	}
 }
