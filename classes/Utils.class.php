@@ -80,7 +80,8 @@
 			$cmd = "adb shell am force-stop com.samsung.android.contacts && adb shell am force-stop com.android.contacts";
 			shell_exec($cmd);
 			//$number = "+55 51 9541-2459";
-			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			// $numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			$numberReplaced = $number;
 			$timeout = 3;
 			$return = shell_exec("adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numberReplaced\" -e phone \"$number\" && sleep $timeout && adb shell input tap 215 28");
 
@@ -89,7 +90,8 @@
 		
 
 		public static function isNumberWhatsApp($number){
-			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			// $numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			$numberReplaced = $number;
 			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \\\"display_name=\'$numberReplaced\' and deleted=0 and account_type=\'com.whatsapp.w4b\'\\\"";
 			
 			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$cmd);
@@ -107,7 +109,9 @@
 
 
 		public static function isNumberExistsInGenyMotionAndroid($number){
-			$numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			// $numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			$numberReplaced = $number;
+			
 			$cmd = "adb shell content query --uri content://com.android.contacts/raw_contacts --where \\\"display_name=\'$numberReplaced\' and deleted=0\\\"";
 			
 			Utils::log("[CRON][cronAddContacts] isNumberExistsInGenyMotionAndroid: $number \n".$cmd);
