@@ -90,7 +90,7 @@
 			$cmd = "adb shell am force-stop com.samsung.android.contacts && adb shell am force-stop com.android.contacts";
 			shell_exec($cmd);
 			//$number = "+55 51 9541-2459";
-			// $numberReplaced = str_replace(array("+"," ","-"), "", $number);
+			$numberReplaced = str_replace(" ", "\ ", $number);
 			$numberReplaced = $number;
 			$timeout = 3;
 
