@@ -99,11 +99,11 @@
 			$return = shell_exec("adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numberReplaced\" -e phone \"$number\" && sleep $timeout && adb shell input tap 215 28");
 
 			Utils::log("[CRON][cronAddContacts] addContactGenyMotionSmartPhone: $number \n".$return);
-
+			
 			//se achou erro retornar falso - nao adicionou o contato
-			if(strpos($return, "Error") !== false){
-			    return false;
-			}
+			// if(strpos($return, "Error") !== false){
+			//     return false;
+			// }
 			
 			return true;
 			  
