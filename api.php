@@ -58,7 +58,7 @@ try{
 				$ddi = "+".$ddi;
 			}
 
-			$number = $ddi.$ddd.$number;
+			$number = $ddi." ".$ddd." ".$number;
 
 			$numbersObj = new Numbers($db);
 			$rsNumber = $numbersObj->getNumber($number);
