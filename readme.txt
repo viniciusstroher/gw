@@ -19,7 +19,12 @@ npm instalal -g pm2
 pm2 start /var/www/html/gw/crons/cronAddContacts.php --cron "*/1 * * * *"
 pm2 start /var/www/html/gw/crons/cronGetContacts.php --cron "*/1 * * * *"
 
+
+#installar cron se for container
+#apt-get install cron
 #ou crontab
+service cron start
+
 #1 * * * * /usr/bin/php /var/www/html/gw/crons/cronAddContacts.php
 #1 * * * * /usr/bin/php /var/www/html/gw/crons/cronGetContacts.php
 
