@@ -13,6 +13,12 @@ try{
 	$access_data = json_encode($access_data); 
 	Utils::log($access_data);
 
+	if(!isset($_POST)){
+		Utils::log("O acesso a esta api precisa ser feito pelo method post");
+		throw new Exception("O acesso a esta api precisa ser feito pelo method post", 1);
+	}
+
+
 	$envVars = Utils::getEnvVars(Utils::$rootPath);
 	$db = new PgSql($envVars['host'],
 					$envVars['port'],
@@ -28,7 +34,7 @@ try{
 
 	Utils::Log("Usuario $user_id authenticado.");
 
-	$action = @$_REQUEST['action'];
+	$action = @$_POST['action'];
 	$response = array();
 	if(empty($action)){
 		Utils::log("Faltou parametro action");
@@ -37,11 +43,20 @@ try{
 
 	switch ($action) {
 		case 'checkNumber':
-			$number = @$_REQUEST['number'];
-			if(empty($number)){
-				Utils::log("number não pode ser null");
-				throw new Exception("number não pode ser null", 1);
+			$ddi 	= @$_POST['ddi'];
+			$ddd    = @$_POST['ddd'];
+			$number = @$_POST['number'];
+
+			if(empty($number) || empty($ddd)){
+				Utils::log("number ou ddd não pode ser null");
+				throw new Exception("number ou ddd não pode ser null", 1);
 			}
+
+			if(!empty($ddi)){
+				$ddi = "+".$ddi;
+			}
+
+			$number = $ddi.$ddd.$number;
 
 			$numbersObj = new Numbers($db);
 			$rsNumber = $numbersObj->getNumber($number);

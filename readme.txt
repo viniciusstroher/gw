@@ -32,6 +32,20 @@ service cron start
 #habilitar (apache) - para pegar ip do cliente  header:x-forwareded-for
 mod_custom_header
 
+
+#####################################################################
+#criar usuario
+php cli/createUser.php <user> <password>
+Retorno: Basic <token>
+
+#deletar usuario
+php cli/deleteUser.php <user> <password>
+Retorno: 
+
+#pegar token
+php cli/generateToken.php <user> <password>
+Retorno: Basic <token>
+
 ######################################################################
 
 #Insert - Consultar
