@@ -30,6 +30,8 @@
 		public static function isAdbOnline(){
 			$shellExecReturn = trim(shell_exec("pgrep adb"));
 			
+			Utils::log("[CRON][cronAddContacts] isAdbOnline: $shellExecReturn \n");
+			
 			if(is_numeric($shellExecReturn)){
 				return true;
 			}
@@ -41,6 +43,8 @@
 			//telnet limitado por 1 segundo na porta do adb 5555
 			$shellExecReturn = trim(shell_exec("timeout 1 telnet $ip 5555"));
 			
+			Utils::log("[CRON][cronAddContacts] isAdbSmartphoneOnline: $shellExecReturn \n");
+		
 			if(strpos($shellExecReturn, "Connected") == true){
 				return true;
 			}
@@ -57,6 +61,9 @@
 		public static function startServer(){
 			//mata adb
 			$return = shell_exec("adb start-server");
+			
+			Utils::log("[CRON][cronAddContacts] startServer: $return \n");
+			
 			if(strpos($return, "daemon started successfully") == true){
 				return true;
 			}
@@ -67,6 +74,9 @@
 		public static function connect($ip){
 			//mata adb
 			$return = shell_exec("adb connect ".$ip);
+			
+			Utils::log("[CRON][cronAddContacts] connect: $return \n");
+			
 			if(strpos($return, "connected") == true){
 				return true;
 			}
@@ -83,8 +93,20 @@
 			// $numberReplaced = str_replace(array("+"," ","-"), "", $number);
 			$numberReplaced = $number;
 			$timeout = 3;
+
+			Utils::log("[CRON][cronAddContacts] addContactGenyMotionSmartPhone: $number \n".$cmd);
+
 			$return = shell_exec("adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numberReplaced\" -e phone \"$number\" && sleep $timeout && adb shell input tap 215 28");
 
+			Utils::log("[CRON][cronAddContacts] addContactGenyMotionSmartPhone: $number \n".$return);
+
+			//se achou erro retornar falso - nao adicionou o contato
+			if(strpos($return, "Error") !== false){
+			    return false;
+			}
+			
+			return true;
+			  
 		}
 
 		
