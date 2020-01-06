@@ -50,8 +50,8 @@ try{
 	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
 	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']."  existsNumber: ".var_export($existsNumber,true),true);
 	if(!$existsNumber){
-		$added = Utils::addContactGenyMotionSmartPhone($numberUnchecked[0]['numbers']);
-		Utils::log("[CRON][cronAddContact] addContactGenyMotionSmartPhone adicionando: ".$numberUnchecked[0]['numbers']." - ".var_export($added,true),true);
+		Utils::addContactGenyMotionSmartPhone($numberUnchecked[0]['numbers']);
+		Utils::log("[CRON][cronAddContact] addContactGenyMotionSmartPhone adicionando: ".$numberUnchecked[0]['numbers'],true);
 		
 	}
 
