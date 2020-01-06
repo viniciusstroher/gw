@@ -53,10 +53,14 @@ HEADER:
 Authorization: Basic base64_encode($usuario:$password)
 
 Method: 
-GET
+POST
 
 IP: 
-http://<IP>/gw/api.php?action=checkNumber&number=<DD><NUMBER>
+http://<IP>/gw/api.php
+action=checkNumber
+number=<NUMBER>
+ddd=<DDD>
+ddi=<DDI> (optional) (nao enviar com +)
 EX:
                                                  DDNNNNNNNN
 http://<IP>/gw/api.php?action=checkNumber&number=5195412459
