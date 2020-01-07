@@ -103,7 +103,10 @@
 			
 			$timeout = 3;
 
-			$cmd = "adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numnumberberReplaced\" -e phone \"$numnumberberReplaced\" && sleep $timeout && adb shell input tap 215 28";
+			// $cmd = "adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numnumberberReplaced\" -e phone \"$numnumberberReplaced\" && sleep $timeout && adb shell input tap 215 28";
+
+			$cmd = "adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.google.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numnumberberReplaced\" -e phone \"$numnumberberReplaced\" && sleep $timeout && adb shell input tap 215 28";
+			
 			Utils::log("[CRON][cronAddContacts] addContactGenyMotionSmartPhone: $number \n".$cmd);
 
 			$return = shell_exec($cmd);
