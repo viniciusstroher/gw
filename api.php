@@ -54,11 +54,17 @@ try{
 				throw new Exception("number ou ddd não pode ser null", 1);
 			}
 
-			if(!empty($ddi)){
-				$ddi = "+".$ddi;
+			if(strlen($number) == 8){
+				Utils::log("number deve conter 8 caracteres");
+				throw new Exception("number deve conter 8 caracteres", 1);
 			}
 
-			$number = $ddi." ".$ddd."-".$number;
+			if(!empty($ddi)){
+				$ddi = "+".str_replace("+", "", $ddi);
+			}
+
+			$number = substr($number, 0,4).'-'.substr($number, 4);
+			$number = $ddi." ".$ddd." ".$number;
 
 			$numbersObj = new Numbers($db);
 			$rsNumber = $numbersObj->getNumber($number);
