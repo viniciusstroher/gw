@@ -16,6 +16,15 @@
 			return $envVars;
 		}
 		
+		public static function parseNumber($number){
+			$number = str_replace(' ', '\ ', $number);
+			$number = str_replace('+', '\+', $number);
+			$number = str_replace('-', '\-', $number);
+			// $number = escapeshellcmd($number);
+			
+			return $number;
+		}
+
 		public static function log($msg, $print = false){
 			$msg = date("[Y-m-d H:i:s] "). $msg."\n";
 			
@@ -90,11 +99,11 @@
 			$cmd = "adb shell am force-stop com.samsung.android.contacts && adb shell am force-stop com.android.contacts";
 			shell_exec($cmd);
 			//$number = "+55 51 9541-2459";
-			$numberReplaced = str_replace(" ", "\ ", $number);
-			$numberReplaced = $number;
+			$numnumberberReplaced = Utils::parseNumber($number);
+			
 			$timeout = 3;
 
-			$cmd = "adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numberReplaced\" -e phone \"$number\" && sleep $timeout && adb shell input tap 215 28";
+			$cmd = "adb shell input keyevent KEYCODE_HOME && adb shell am force-stop com.android.contacts && adb shell am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/contact -e name \"$numnumberberReplaced\" -e phone \"$numnumberberReplaced\" && sleep $timeout && adb shell input tap 215 28";
 			Utils::log("[CRON][cronAddContacts] addContactGenyMotionSmartPhone: $number \n".$cmd);
 
 			$return = shell_exec($cmd);
