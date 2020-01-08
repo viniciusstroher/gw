@@ -48,7 +48,9 @@ try{
 	if(!$isSmartphoneConnected){
 		Utils::killServer();
 		Utils::log("[CRON][cronAddContact] Kill adb",true);	
+		exit;
 	}
+
 	//adiciona numero se nao existir
 	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
 	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']."  existsNumber: ".var_export($existsNumber,true),true);
