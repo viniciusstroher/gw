@@ -18,7 +18,7 @@ npm instalal -g pm2
 #pm2
 pm2 start /var/www/html/gw/crons/cronAddContacts.php --cron "*/1 * * * *"
 pm2 start /var/www/html/gw/crons/cronGetContacts.php --cron "*/1 * * * *"
-
+pm2 start /var/www/html/gw/crons/cronCheckAdb.php --cron "*/1 * * * *"
 
 #installar cron se for container
 #apt-get install cron
@@ -27,6 +27,7 @@ service cron start
 
 #* * * * * /usr/bin/php /var/www/html/gw/crons/cronAddContacts.php
 #* * * * * /usr/bin/php /var/www/html/gw/crons/cronGetContacts.php
+#* * * * * /usr/bin/php /var/www/html/gw/crons/cronCheckAdb.php
 
 
 #habilitar (apache) - para pegar ip do cliente  header:x-forwareded-for
@@ -68,7 +69,7 @@ ddd=<DDD>
 ddi=<DDI> (optional) (nao enviar com +)
 EX:
                                                  DDNNNNNNNN
-http://<IP>/gw/api.php?action=checkNumber&number=5195412459
+http://<IP>/gw/api.php?action=checkNumber&ddi=55&ddd=51&number=95412459
 
 RETORNO:
 {

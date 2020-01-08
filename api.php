@@ -49,9 +49,9 @@ try{
 			$ddd    = @$_POST['ddd'];
 			$number = @$_POST['number'];
 
-			if(empty($number) || empty($ddd)){
-				Utils::log("number ou ddd não pode ser null");
-				throw new Exception("number ou ddd não pode ser null", 1);
+			if(empty($number) || empty($ddd) || empty($ddi)){
+				Utils::log("number , ddd e ddi não pode ser null");
+				throw new Exception("number , ddd e ddi não pode ser null", 1);
 			}
 
 			if(strlen($number) != 8){
