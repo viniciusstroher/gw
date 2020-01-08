@@ -48,6 +48,11 @@ Retorno: Basic <token>
 
 ######################################################################
 
+Sistema depende do adb e as vezes o genymotion derruba.
+COLOCAR MONITORAMENTO NO ZABBIX (telnet <ip_mobile> 5555)
+
+##################
+
 #Insert - Consultar
 HEADER:
 Authorization: Basic base64_encode($usuario:$password)

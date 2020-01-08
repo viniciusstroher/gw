@@ -21,12 +21,12 @@ class Numbers{
 	}
 
 	function getUncheckedNumber($limit = null){
-		
+		$envVars = Utils::getEnvVars(Utils::$rootPath);
 	    //pega mais de 1min
 	    $sqlCheck = "SELECT * 
 	    			 FROM numbers 
 	    			 WHERE status = 'UNCHECKED' 
-	    			 and EXTRACT(EPOCH FROM (now() - created_at)) > 15 ";
+	    			 and EXTRACT(EPOCH FROM (now() - created_at)) > ".$envVars['threshhold_unchecked'];
 	    ;
 	    if(!empty($limit)){
 	    	$sqlCheck .= "LIMIT $limit";
@@ -43,7 +43,7 @@ class Numbers{
 	    $sqlCheck = "SELECT * 
 	    			 FROM numbers 
 	    			 WHERE status = 'ADDED' 
-	    			 and EXTRACT(EPOCH FROM (now() - updated_at)) > 30 ";
+	    			 and EXTRACT(EPOCH FROM (now() - updated_at)) > ".$envVars['threshhold_added'];
 	    if(!empty($limit)){
 	    	$sqlCheck .= "LIMIT $limit";
 	    }

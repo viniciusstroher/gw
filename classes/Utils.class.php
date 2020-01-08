@@ -85,7 +85,7 @@
 			
 			Utils::log("[CRON][cronAddContacts] startServer: $return \n");
 			
-			if(strpos($return, "daemon started successfully") == true){
+			if(strpos($return, "daemon started successfully") !== false){
 				return true;
 			}
 
