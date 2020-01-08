@@ -38,7 +38,7 @@ class Numbers{
 	}
 
 	function getAddedNumber($limit = null){
- 
+ 		$envVars = Utils::getEnvVars(Utils::$rootPath);
 	    //pega mais de 1min
 	    $sqlCheck = "SELECT * 
 	    			 FROM numbers 
