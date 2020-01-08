@@ -5,23 +5,16 @@
 try{
 
 	$date = date("[Y-m-d H:i:s] ");
-
-
-
-	$isDeviceConnected 	   = Utils::isSmartphoneConnected();
-	Utils::log("[CRON][cronAddContact] isDeviceConnected: ".var_export($isDeviceConnected,true),true);
-	if(!$isDeviceConnected){
-		exit;
-	}
-	
 	$envVars = Utils::getEnvVars(Utils::$rootPath);
+
 	$db = new PgSql($envVars['host'],
 					$envVars['port'],
 					$envVars['db'],
 					$envVars['username'],
 					$envVars['password']);
-		
+	
 	$numbersObj = new Numbers($db);
+
 
 	$numberUnchecked = $numbersObj->getUncheckedNumber(1);
 	if(count($numberUnchecked) == 0){
@@ -30,6 +23,43 @@ try{
 	}
 	
 	Utils::log("[CRON][cronAddContact] ".count($numberUnchecked)." contatos para serem adicionados",true);
+	
+	//verifica se adb esta online
+	// $isAdbOnline = Utils::isAdbOnline();
+	// Utils::log("[CRON][cronAddContact] isAdbOnline: ".var_export($isAdbOnline,true),true);
+	
+	// if(!$isAdbOnline){
+	// 	Utils::startServer();
+	// }
+
+	// $isAdbOnline = Utils::isAdbOnline();
+	// if(!$isAdbOnline){
+	// 	Utils::log("[CRON][cronAddContact] isAdbOnline: ".var_export($isAdbOnline,true)."..... Saindo...",true);
+	// 	exit;
+	// }
+
+	// //verifica se dispositivo esta vivo
+	// $isAdbSmartphoneOnline = Utils::isAdbSmartphoneOnline($envVars['ipandroid']);
+	// Utils::log("[CRON][cronAddContact] isAdbSmartphoneOnline: ".var_export($isAdbSmartphoneOnline,true),true);
+
+	$isDeviceConnected 	   = Utils::isSmartphoneConnected();
+	$isSmartphoneConnected = false;
+	
+	Utils::log("[CRON][cronAddContact] isDeviceConnected: ".var_export($isDeviceConnected,true),true);
+	if(!$isDeviceConnected){
+		//verifica se o genytmotion esta connectado ao adb
+		$isSmartphoneConnected = Utils::connect($envVars['ipandroid']);
+		Utils::log("[CRON][cronAddContact] isSmartphoneConnected: ".var_export($isSmartphoneConnected,true),true);
+	}
+	
+	if(!$isSmartphoneConnected){
+		Utils::killServer();
+		Utils::log("[CRON][cronAddContact] killServer",true);	
+
+		Utils::startServer();
+		Utils::log("[CRON][cronAddContact] startServer",true);	
+		exit;
+	}
 
 	//adiciona numero se nao existir
 	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
@@ -37,7 +67,9 @@ try{
 	if(!$existsNumber){
 		Utils::addContactGenyMotionSmartPhone($numberUnchecked[0]['numbers']);
 		Utils::log("[CRON][cronAddContact] addContactGenyMotionSmartPhone adicionando: ".$numberUnchecked[0]['numbers'],true);
+		
 	}
+
 
 	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
 	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']." now existsNumber: ".var_export($existsNumber,true),true);

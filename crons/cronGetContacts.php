@@ -5,6 +5,12 @@
 try{
 	$date = date("[Y-m-d H:i:s] ");
 
+	$isDeviceConnected 	   = Utils::isSmartphoneConnected();
+	Utils::log("[CRON][cronAddContact] isDeviceConnected: ".var_export($isDeviceConnected,true),true);
+	if(!$isDeviceConnected){
+		exit;
+	}
+
 	$envVars = Utils::getEnvVars(Utils::$rootPath);
 	$db = new PgSql($envVars['host'],
 					$envVars['port'],
@@ -21,30 +27,6 @@ try{
 	}
 
 	Utils::log("[CRON][cronGetContacts] ".count($numberAddedked)." contatos para serem analisados",true);
-
-	//verifica se adb esta online
-	$isAdbOnline = Utils::isAdbOnline();
-	Utils::log("[CRON][cronGetContacts] isAdbOnline: ".var_export($isAdbOnline,true),true);
-	
-	if(!$isAdbOnline){
-		//inicia adb se estiver parado
-		Utils::startServer();
-		//throw new Exception("Adb esta offline.", 1);
-	}
-
-	$isAdbOnline = Utils::isAdbOnline();
-	if(!$isAdbOnline){
-		Utils::log("[CRON][cronGetContacts] isAdbOnline: ".var_export($isAdbOnline,true)."..... Saindo...",true);
-		exit;
-	}
-
-	//verifica se dispositivo esta vivo
-	$isAdbSmartphoneOnline = Utils::isAdbSmartphoneOnline($envVars['ipandroid']);
-	Utils::log("[CRON][cronGetContacts] isAdbSmartphoneOnline: ".var_export($isAdbSmartphoneOnline,true),true);
-	
-	//verifica se o genytmotion esta connectado ao adb
-	$isSmartphoneConnected = Utils::connect($envVars['ipandroid']);
-	Utils::log("[CRON][cronGetContacts] isSmartphoneConnected: ".var_export($isSmartphoneConnected,true),true);
 
 	//edita numero 
 	$whats = Utils::isNumberWhatsApp($numberAddedked[0]['numbers']);
