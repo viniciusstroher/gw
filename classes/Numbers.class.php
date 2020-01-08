@@ -45,7 +45,7 @@ class Numbers{
 	    			 WHERE status = 'ADDED' 
 	    			 and EXTRACT(EPOCH FROM (now() - updated_at)) > ".$envVars['threshhold_added'];
 	    if(!empty($limit)){
-	    	$sqlCheck .= "LIMIT $limit";
+	    	$sqlCheck .= " LIMIT $limit";
 	    }
 
 	    $numbers = $this->db->getRows($sqlCheck);
