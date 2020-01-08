@@ -48,6 +48,18 @@
 			return false;
 		}
 
+		public static function isSmartphoneConnected(){
+			$shellExecReturn = trim(shell_exec("adb get-state 1>/dev/null 2>&1 && echo 'online' || echo 'offline'"));
+			
+			Utils::log("[CRON][cronAddContacts] isSmartphoneConnected: $shellExecReturn \n");
+			
+			if(strpos($shellExecReturn, "online") !== false){
+				return true;
+			}
+
+			return false;
+		}
+
 		public static function isAdbSmartphoneOnline($ip){
 			//telnet limitado por 1 segundo na porta do adb 5555
 			$shellExecReturn = trim(shell_exec("timeout 1 telnet $ip 5555"));

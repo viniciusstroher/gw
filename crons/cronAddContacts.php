@@ -25,29 +25,39 @@ try{
 	Utils::log("[CRON][cronAddContact] ".count($numberUnchecked)." contatos para serem adicionados",true);
 	
 	//verifica se adb esta online
-	$isAdbOnline = Utils::isAdbOnline();
-	Utils::log("[CRON][cronAddContact] isAdbOnline: ".var_export($isAdbOnline,true),true);
+	// $isAdbOnline = Utils::isAdbOnline();
+	// Utils::log("[CRON][cronAddContact] isAdbOnline: ".var_export($isAdbOnline,true),true);
 	
-	if(!$isAdbOnline){
-		Utils::startServer();
-	}
+	// if(!$isAdbOnline){
+	// 	Utils::startServer();
+	// }
 
-	$isAdbOnline = Utils::isAdbOnline();
-	if(!$isAdbOnline){
-		Utils::log("[CRON][cronAddContact] isAdbOnline: ".var_export($isAdbOnline,true)."..... Saindo...",true);
-		exit;
-	}
+	// $isAdbOnline = Utils::isAdbOnline();
+	// if(!$isAdbOnline){
+	// 	Utils::log("[CRON][cronAddContact] isAdbOnline: ".var_export($isAdbOnline,true)."..... Saindo...",true);
+	// 	exit;
+	// }
 
-	//verifica se dispositivo esta vivo
-	$isAdbSmartphoneOnline = Utils::isAdbSmartphoneOnline($envVars['ipandroid']);
-	Utils::log("[CRON][cronAddContact] isAdbSmartphoneOnline: ".var_export($isAdbSmartphoneOnline,true),true);
+	// //verifica se dispositivo esta vivo
+	// $isAdbSmartphoneOnline = Utils::isAdbSmartphoneOnline($envVars['ipandroid']);
+	// Utils::log("[CRON][cronAddContact] isAdbSmartphoneOnline: ".var_export($isAdbSmartphoneOnline,true),true);
+
+	$isDeviceConnected 	   = Utils::isSmartphoneConnected();
+	$isSmartphoneConnected = false;
 	
-	//verifica se o genytmotion esta connectado ao adb
-	$isSmartphoneConnected = Utils::connect($envVars['ipandroid']);
-	Utils::log("[CRON][cronAddContact] isSmartphoneConnected: ".var_export($isSmartphoneConnected,true),true);
+	Utils::log("[CRON][cronAddContact] isDeviceConnected: ".var_export($isDeviceConnected,true),true);
+	if(!$isDeviceConnected){
+		//verifica se o genytmotion esta connectado ao adb
+		$isSmartphoneConnected = Utils::connect($envVars['ipandroid']);
+		Utils::log("[CRON][cronAddContact] isSmartphoneConnected: ".var_export($isSmartphoneConnected,true),true);
+	}
+	
 	if(!$isSmartphoneConnected){
 		Utils::killServer();
-		Utils::log("[CRON][cronAddContact] Kill adb",true);	
+		Utils::log("[CRON][cronAddContact] killServer",true);	
+
+		Utils::startServer();
+		Utils::log("[CRON][cronAddContact] startServer",true);	
 		exit;
 	}
 
