@@ -45,7 +45,10 @@ try{
 	//verifica se o genytmotion esta connectado ao adb
 	$isSmartphoneConnected = Utils::connect($envVars['ipandroid']);
 	Utils::log("[CRON][cronAddContact] isSmartphoneConnected: ".var_export($isSmartphoneConnected,true),true);
-
+	if(!$isSmartphoneConnected){
+		Utils::killServer();
+		Utils::log("[CRON][cronAddContact] Kill adb",true);	
+	}
 	//adiciona numero se nao existir
 	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
 	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']."  existsNumber: ".var_export($existsNumber,true),true);
