@@ -27,7 +27,7 @@ class Numbers{
 	    			 FROM numbers 
 	    			 WHERE status = 'UNCHECKED' 
 	    			 and EXTRACT(EPOCH FROM (now() - created_at)) > ".$envVars['threshhold_unchecked'];
-	    ;
+	    
 	    if(!empty($limit)){
 	    	$sqlCheck .= "LIMIT $limit";
 	    }
