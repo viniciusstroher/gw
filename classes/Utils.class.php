@@ -96,7 +96,7 @@
 			//mata adb
 			$return = shell_exec("adb connect ".$ip);
 			
-			Utils::log("[CRON][cronAddContacts] connect: $return \n");
+			Utils::log("[CRON][cronAddContacts] connect: $return \n",true);
 			
 			if(strpos($return, "connected") == true){
 				return true;
