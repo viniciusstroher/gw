@@ -98,7 +98,7 @@
 			
 			Utils::log("[CRON][cronAddContacts] connect: $return \n",true);
 			
-			if(strpos($return, "connected") == true){
+			if(strpos($return, "connected") !== false){
 				return true;
 			}
 			
