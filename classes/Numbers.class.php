@@ -11,7 +11,7 @@ class Numbers{
 	    $sqlCheck = "SELECT * 
 	    			 FROM numbers 
 	    			 WHERE numbers 
-	    			 like '%$number%'";
+	    			 = '$number'";
 	    $numbers = $this->db->getRows($sqlCheck);
 
 	    Utils::log($sqlCheck);

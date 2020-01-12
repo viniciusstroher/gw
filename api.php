@@ -71,6 +71,10 @@ try{
 			if(empty($rsNumber)){
 				$numbersObj->addNumber($user_id,$number);
 				$rsNumber = $numbersObj->getNumber($number);
+			}else{
+				$whats = Utils::isNumberWhatsApp($number);
+				$numbersObj->updateNumber($number,$rsNumber['status'],$whats);
+				$rsNumber = $numbersObj->getNumber($number);
 			}
 
 			$response['data'] = $rsNumber;
