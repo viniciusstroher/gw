@@ -10,7 +10,7 @@ try{
 		
 	}
 
-	$envVars = Utils::getEnvVars(Utils::$logPath);
+	$envVars = Utils::getEnvVars(Utils::$rootPath);
 	$db = new PgSql($envVars['host'],
 					$envVars['port'],
 					$envVars['db'],
