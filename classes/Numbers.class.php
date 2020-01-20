@@ -88,10 +88,10 @@ class Numbers{
 	}
 
 	function addGroup ($group,$id){
-		if(!empty($group)){
-			$sqlGroup = "UPDATE numbers SET group ='$group' WHERE id = ".$id;
-			$this->db->exec($sqlGroup);
-		}
+		
+		$sqlGroup = "UPDATE numbers SET group ='$group' WHERE id = ".$id;
+		$this->db->exec($sqlGroup);
+		
 	}
 
 	function updateNumber($number,$status = 'UNCHECKED',$whats = false){

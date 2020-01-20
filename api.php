@@ -80,7 +80,11 @@ try{
 			$rsNumber = $numbersObj->getNumber($number);
 			if(empty($rsNumber)){
 				$id = $numbersObj->addNumber($user_id,$number);
-				$numbersObj->addGroup ($group,$id);
+				
+				if(!empty($group)){
+					$numbersObj->addGroup($group,$id);
+				}
+
 				$rsNumber = $numbersObj->getNumber($number);
 			}else{
 				$whats = Utils::isNumberWhatsApp($number);
