@@ -53,7 +53,7 @@ class Numbers{
 
 	}
 
-	function addNumber($user_id,$number,$status = 'UNCHECKED',$whats = false,$group){
+	function addNumber($user_id,$number,$status = 'UNCHECKED',$whats = false){
   
 	    $sqlCheck  = "SELECT COUNT(*) numbers 
 	    			  FROM numbers 
