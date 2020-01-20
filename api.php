@@ -55,16 +55,25 @@ try{
 				throw new Exception("number , ddd e ddi não pode ser null", 1);
 			}
 
-			if(strlen($number) != 8){
-				Utils::log("number deve conter 8 caracteres");
-				throw new Exception("number deve conter 8 caracteres", 1);
+			if(strlen($number) >= 8 || strlen($number) <= 9){
+				Utils::log("number deve conter 8 a 9 caracteres");
+				throw new Exception("number deve conter 8 a 9 caracteres", 1);
 			}
 
 			if(!empty($ddi)){
 				$ddi = "+".str_replace("+", "", $ddi);
 			}
 
-			$number = substr($number, 0,4).'-'.substr($number, 4);
+			if(strlen($number) == 8){
+				$splitNumber = 4;
+			}
+
+			if(strlen($number) == 9){
+				$splitNumber = 5;
+			}
+
+			// $number = substr($number, 0,4).'-'.substr($number, 4);
+			$number = substr($number, 0,$splitNumber).'-'.substr($number, 4);
 			$number = $ddi." ".$ddd." ".$number;
 
 			$numbersObj = new Numbers($db);
