@@ -81,15 +81,17 @@ class Numbers{
 			throw new Exception("Error inserir numero", 1);
 		}
 
-		if(!empty($group)){
-			$sqlGroup = "UPDATE numbers SET group ='$group' WHERE id = ".$id;
-			$this->db->exec($sqlGroup);
-		}
-
 		Utils::log($sqlInsert);
 
 		return $id;
 
+	}
+
+	function addGroup ($group,$id){
+		if(!empty($group)){
+			$sqlGroup = "UPDATE numbers SET group ='$group' WHERE id = ".$id;
+			$this->db->exec($sqlGroup);
+		}
 	}
 
 	function updateNumber($number,$status = 'UNCHECKED',$whats = false){
