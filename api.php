@@ -55,7 +55,7 @@ try{
 				throw new Exception("number , ddd e ddi não pode ser null", 1);
 			}
 
-			if(strlen($number) >= 8 || strlen($number) <= 9){
+			if(strlen($number) < 8 || strlen($number) > 9){
 				Utils::log("number deve conter 8 a 9 caracteres");
 				throw new Exception("number deve conter 8 a 9 caracteres", 1);
 			}
