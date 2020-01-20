@@ -88,8 +88,8 @@ class Numbers{
 	}
 
 	function addGroup ($group,$id){
-		
-		$sqlGroup = "UPDATE numbers SET group ='$group' WHERE id = ".$id;
+
+		$sqlGroup = "UPDATE numbers SET \"group\" ='$group' WHERE id = ".$id;
 		$this->db->exec($sqlGroup);
 		
 	}
