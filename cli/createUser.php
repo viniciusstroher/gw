@@ -26,7 +26,7 @@ try{
 		throw new Exception("Erro ao criar usuario", 1);
 	}
 
-	print "Authorizaiton: Basic ".base64_encode($username.":".$password)."\n";
+	print "Authorization: Basic ".base64_encode($username.":".$password)."\n";
 
 }catch(Exception $e){
 	

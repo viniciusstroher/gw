@@ -20,7 +20,7 @@ try{
 	$sql = "select * from users where username='$username'";
 	$rsUser = $db->getRow($sql);
 
-	print "Authorizaiton: Basic ".base64_encode($rsUser['username'].":".$rsUser['password'])."\n";
+	print "Authorization: Basic ".base64_encode($rsUser['username'].":".$rsUser['password'])."\n";
 
 
 }catch(Exception $e){
