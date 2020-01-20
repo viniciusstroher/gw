@@ -73,7 +73,7 @@ try{
 			}
 
 			// $number = substr($number, 0,4).'-'.substr($number, 4);
-			$number = substr($number, 0,$splitNumber).'-'.substr($number, 4);
+			$number = substr($number, 0,$splitNumber).'-'.substr($number, $splitNumber);
 			$number = $ddi." ".$ddd." ".$number;
 
 			$numbersObj = new Numbers($db);
