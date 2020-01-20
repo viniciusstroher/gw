@@ -12,7 +12,7 @@ class Numbers{
 	    			 FROM numbers 
 	    			 WHERE numbers 
 	    			 = '$number'";
-	    $numbers = $this->db->getRows($sqlCheck);
+	    $numbers = $this->db->getRow($sqlCheck);
 
 	    Utils::log($sqlCheck);
 

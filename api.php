@@ -80,7 +80,6 @@ try{
 			$rsNumber = $numbersObj->getNumber($number);
 			if(empty($rsNumber)){
 				$id = $numbersObj->addNumber($user_id,$number);
-				
 				if(!empty($group)){
 					$numbersObj->addGroup($group,$id);
 				}
