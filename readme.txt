@@ -67,6 +67,7 @@ action=checkNumber
 number=<NUMBER>
 ddd=<DDD>
 ddi=<DDI> (optional) (nao enviar com +)
+group=optional for grouping
 EX:
                                                  DDNNNNNNNN
 http://<IP>/gw/api.php?action=checkNumber&ddi=55&ddd=51&number=95412459
