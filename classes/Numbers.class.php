@@ -53,7 +53,7 @@ class Numbers{
 
 	}
 
-	function addNumber($user_id,$number,$status = 'UNCHECKED',$whats = false){
+	function addNumber($user_id,$number,$status = 'UNCHECKED',$whats = false,$group){
   
 	    $sqlCheck  = "SELECT COUNT(*) numbers 
 	    			  FROM numbers 
@@ -80,7 +80,12 @@ class Numbers{
 		if(!is_numeric($id)){
 			throw new Exception("Error inserir numero", 1);
 		}
-		
+
+		if(!empty($group)){
+			$sqlGroup = "UPDATE numbers SET group ='$group' WHERE id = ".$id;
+			$this->db->exec($sqlGroup);
+		}
+
 		Utils::log($sqlInsert);
 
 		return $id;

@@ -48,6 +48,7 @@ try{
 			$ddi 	= @$_POST['ddi'];
 			$ddd    = @$_POST['ddd'];
 			$number = @$_POST['number'];
+			$group = @$_POST['group'];
 
 			if(empty($number) || empty($ddd) || empty($ddi)){
 				Utils::log("number , ddd e ddi não pode ser null");
@@ -69,7 +70,7 @@ try{
 			$numbersObj = new Numbers($db);
 			$rsNumber = $numbersObj->getNumber($number);
 			if(empty($rsNumber)){
-				$numbersObj->addNumber($user_id,$number);
+				$numbersObj->addNumber($user_id,$number,$group);
 				$rsNumber = $numbersObj->getNumber($number);
 			}else{
 				$whats = Utils::isNumberWhatsApp($number);
