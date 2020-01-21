@@ -23,7 +23,7 @@ try{
 		
 	$numbersObj = new Numbers($db);
 
-	$numberUncheckeds = $numbersObj->getUncheckedNumber(5);
+	$numberUncheckeds = $numbersObj->getUncheckedNumber($envVars['fetch_add_number']);
 	
 	if(count($numberUncheckeds) == 0){
 		Utils::log("[CRON][cronAddContact] Nenhum contato para ser adicionado",true);

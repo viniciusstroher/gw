@@ -20,18 +20,20 @@ try{
 	
 	$numbersObj = new Numbers($db);
 
-	$numberAddedked = $numbersObj->getAddedNumber(1000);
-	if(count($numberAddedked) == 0){
+	$numberAdded = $numbersObj->getAddedNumber($envVars['fetch_get_number']);
+	if(count($numberAdded) == 0){
 		Utils::log("[CRON][cronGetContacts] Nenhum contato para ser analisado",true);
 		exit;
 	}
 
-	Utils::log("[CRON][cronGetContacts] ".count($numberAddedked)." contatos para serem analisados",true);
-
-	//edita numero 
-	$whats = Utils::isNumberWhatsApp($numberAddedked[0]['numbers']);
-	Utils::log("[CRON][cronGetContacts] isNumberWhatsApp number: ".$numberAddedked[0]['numbers']." - whats: ".var_export($whats,true),true);
-	$numbersObj->updateNumber($numberAddedked[0]['numbers'],'CHECKED',$whats);
+	Utils::log("[CRON][cronGetContacts] ".count($numberAdded)." contatos para serem analisados",true);
+	foreach ($numberAdded as $key => $nA) {
+		//edita numero 
+		$whats = Utils::isNumberWhatsApp($nA['numbers']);
+		Utils::log("[CRON][cronGetContacts] isNumberWhatsApp number: ".$nA['numbers']." - whats: ".var_export($whats,true),true);
+		$numbersObj->updateNumber($nA['numbers'],'CHECKED',$whats);
+	}
+	
 }catch(Exception $e){
 	
 	Utils::log("[CRON][cronGetContacts][ERROR] ".$e->getMessage(),true);
