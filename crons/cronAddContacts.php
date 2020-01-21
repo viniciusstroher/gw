@@ -23,27 +23,36 @@ try{
 		
 	$numbersObj = new Numbers($db);
 
-	$numberUnchecked = $numbersObj->getUncheckedNumber(1);
-	if(count($numberUnchecked) == 0){
+	$numberUncheckeds = $numbersObj->getUncheckedNumber(5);
+	
+	if(count($numberUncheckeds) == 0){
 		Utils::log("[CRON][cronAddContact] Nenhum contato para ser adicionado",true);
 		exit;
 	}
-	
-	Utils::log("[CRON][cronAddContact] ".count($numberUnchecked)." contatos para serem adicionados",true);
 
-	//adiciona numero se nao existir
-	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
-	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']."  existsNumber: ".var_export($existsNumber,true),true);
-	if(!$existsNumber){
-		Utils::addContactGenyMotionSmartPhone($numberUnchecked[0]['numbers']);
-		Utils::log("[CRON][cronAddContact] addContactGenyMotionSmartPhone adicionando: ".$numberUnchecked[0]['numbers'],true);
+	foreach ($numberUncheckeds as $key => $numberUnchecked) {
+		
+		
+		Utils::log("[CRON][cronAddContact] ".count($numberUnchecked)." contatos para serem adicionados",true);
+
+		//adiciona numero se nao existir
+		$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked['numbers']);
+		Utils::log("[CRON][cronAddContact] ".$numberUnchecked['numbers']."  existsNumber: ".var_export($existsNumber,true),true);
+		if(!$existsNumber){
+			Utils::addContactGenyMotionSmartPhone($numberUnchecked['numbers']);
+			Utils::log("[CRON][cronAddContact] addContactGenyMotionSmartPhone adicionando: ".$numberUnchecked['numbers'],true);
+		}
+
+		$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked['numbers']);
+		Utils::log("[CRON][cronAddContact] ".$numberUnchecked['numbers']." now existsNumber: ".var_export($existsNumber,true),true);
+
+		if($existsNumber){
+			$numbersObj->updateNumber($numberUnchecked['numbers'],'ADDED');
+		}
+		
 	}
 
-	$existsNumber = Utils::isNumberExistsInGenyMotionAndroid($numberUnchecked[0]['numbers']);
-	Utils::log("[CRON][cronAddContact] ".$numberUnchecked[0]['numbers']." now existsNumber: ".var_export($existsNumber,true),true);
-	if($existsNumber){
-		$numbersObj->updateNumber($numberUnchecked[0]['numbers'],'ADDED');
-	}
+
 }catch(Exception $e){
 	
 	Utils::log("[CRON][cronAddContact][ERROR] ".$e->getMessage(),true);

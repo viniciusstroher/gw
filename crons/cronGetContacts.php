@@ -20,7 +20,7 @@ try{
 	
 	$numbersObj = new Numbers($db);
 
-	$numberAddedked = $numbersObj->getAddedNumber(1);
+	$numberAddedked = $numbersObj->getAddedNumber(1000);
 	if(count($numberAddedked) == 0){
 		Utils::log("[CRON][cronGetContacts] Nenhum contato para ser analisado",true);
 		exit;
