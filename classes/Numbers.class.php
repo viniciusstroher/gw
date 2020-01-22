@@ -72,9 +72,9 @@ class Numbers{
 		}
 
 		$whats = $whats ? 'true':'false';
-
-	    $sqlInsert = "INSERT INTO numbers (user_id,numbers,whats,status,created_at,updated_at) 
-	    			  VALUES ($user_id,'$number',$whats,'$status',now(),null)";
+		$ip = isset($_SERVER) ? "'".$_SERVER['REMOTE_ADDR']."'" : null;
+	    $sqlInsert = "INSERT INTO numbers (user_id,numbers,whats,status,created_at,updated_at,ip) 
+	    			  VALUES ($user_id,'$number',$whats,'$status',now(),null,$ip)";
 
 	    $id = $this->db->insert($sqlInsert);
 		if(!is_numeric($id)){
