@@ -32,7 +32,13 @@ try{
 
 	foreach ($numberUncheckeds as $key => $numberUnchecked) {
 		
-		
+		$isDeviceConnected 	   = Utils::isSmartphoneConnected();
+		Utils::log("[CRON][cronAddContact] isDeviceConnected: ".var_export($isDeviceConnected,true),true);
+		if(!$isDeviceConnected){
+			exit;
+		}
+
+
 		Utils::log("[CRON][cronAddContact] ".count($numberUnchecked)." contatos para serem adicionados",true);
 
 		//adiciona numero se nao existir

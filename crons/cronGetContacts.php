@@ -28,6 +28,11 @@ try{
 
 	Utils::log("[CRON][cronGetContacts] ".count($numberAdded)." contatos para serem analisados",true);
 	foreach ($numberAdded as $key => $nA) {
+		$isDeviceConnected 	   = Utils::isSmartphoneConnected();
+		Utils::log("[CRON][cronAddContact] isDeviceConnected: ".var_export($isDeviceConnected,true),true);
+		if(!$isDeviceConnected){
+			exit;
+		}
 		//edita numero 
 		$whats = Utils::isNumberWhatsApp($nA['numbers']);
 		Utils::log("[CRON][cronGetContacts] isNumberWhatsApp number: ".$nA['numbers']." - whats: ".var_export($whats,true),true);
