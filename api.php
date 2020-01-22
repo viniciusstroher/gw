@@ -92,7 +92,7 @@ try{
 				$state = $rsNumber['status'];
 				if($state == 'ADDED'){
 					//troca o estado para checked so se ja foi adicionado
-					$state = 'CHECKED'
+					$state = 'CHECKED';
 				}
 
 				$numbersObj->updateNumber($number,$state,$whats);
