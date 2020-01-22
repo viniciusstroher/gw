@@ -87,7 +87,8 @@ try{
 				$rsNumber = $numbersObj->getNumber($number);
 			}else{
 				$whats = Utils::isNumberWhatsApp($number);
-				$numbersObj->updateNumber($number,$rsNumber['status'],$whats);
+				// $numbersObj->updateNumber($number,$rsNumber['status'],$whats);
+				$numbersObj->updateNumber($number,'CHECKED',$whats);
 				$rsNumber = $numbersObj->getNumber($number);
 			}
 
